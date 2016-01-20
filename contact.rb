@@ -43,17 +43,21 @@ class Contact
       def self.search_by_attribute(name, value)
         # Implement this method
           case name
-          when 1 then @@contacts.find_all {|contact| contact.first_name == value}
-          when 2 then @@contacts.find_all {|contact| contact.last_name == value}
-          when 3 then @@contacts.find_all {|contact| contact.email == value}
+          when "first_name", 1
+             @@contacts.find_all {|contact| contact.first_name == value}
+          when "last_name", 2
+            @@contacts.find_all {|contact| contact.last_name == value}
+          when "email", 3
+            @@contacts.find_all {|contact| contact.email == value}
             else
               puts "No contact found"
-          endls
+          end
 
       end
 
       def self.delete_all
         @@contacts = []
+        @@id = 1 
       end
 
       def full_name
@@ -61,13 +65,13 @@ class Contact
       end
 
       def update(attribute, value)
-        if attribute == 1
+        if attribute == 1 || attribute == "first_name"
           @first_name = value
-        elsif attribute == 2
+        elsif attribute == 2 || attribute == "last_name"
           @last_name = value
-        elsif attribute == 3
+        elsif attribute == 3 || attribute == "email"
           @email = value
-        elsif attribute == 4
+        elsif attribute == 4 || attribute == "note"
           @note = value
         else
           puts "Nothing to change"
